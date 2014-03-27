@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListOrderDetailsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListOrderDetailsEmpty}" rendered="#{orderDetailsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{orderDetailsController.items.rowCount > 0}">
+                    <h:outputText value="#{orderDetailsController.pagination.pageFirstItem + 1}..#{orderDetailsController.pagination.pageLastItem + 1}/#{orderDetailsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{orderDetailsController.previous}" value="#{bundle.Previous} #{orderDetailsController.pagination.pageSize}" rendered="#{orderDetailsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{orderDetailsController.next}" value="#{bundle.Next} #{orderDetailsController.pagination.pageSize}" rendered="#{orderDetailsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{orderDetailsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrderDetailsTitle_itemPrice}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemPrice}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrderDetailsTitle_menu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menu}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrderDetailsTitle_orderHeader}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orderHeader}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{orderDetailsController.prepareView}" value="#{bundle.ListOrderDetailsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{orderDetailsController.prepareEdit}" value="#{bundle.ListOrderDetailsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{orderDetailsController.destroy}" value="#{bundle.ListOrderDetailsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{orderDetailsController.prepareCreate}" value="#{bundle.ListOrderDetailsCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListOrderDetailsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

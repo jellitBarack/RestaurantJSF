@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOrderHeaderTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_orderHeaderId}"/>
+                    <h:outputText value="#{orderHeaderController.selected.orderHeaderId}" title="#{bundle.ViewOrderHeaderTitle_orderHeaderId}"/>
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_orderDate}"/>
+                    <h:outputText value="#{orderHeaderController.selected.orderDate}" title="#{bundle.ViewOrderHeaderTitle_orderDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_orderTax}"/>
+                    <h:outputText value="#{orderHeaderController.selected.orderTax}" title="#{bundle.ViewOrderHeaderTitle_orderTax}"/>
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_orderSubtotal}"/>
+                    <h:outputText value="#{orderHeaderController.selected.orderSubtotal}" title="#{bundle.ViewOrderHeaderTitle_orderSubtotal}"/>
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_orderTotal}"/>
+                    <h:outputText value="#{orderHeaderController.selected.orderTotal}" title="#{bundle.ViewOrderHeaderTitle_orderTotal}"/>
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_custLastName}"/>
+                    <h:outputText value="#{orderHeaderController.selected.custLastName}" title="#{bundle.ViewOrderHeaderTitle_custLastName}"/>
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_custFirstName}"/>
+                    <h:outputText value="#{orderHeaderController.selected.custFirstName}" title="#{bundle.ViewOrderHeaderTitle_custFirstName}"/>
+                    <h:outputText value="#{bundle.ViewOrderHeaderLabel_orderHeadercol}"/>
+                    <h:outputText value="#{orderHeaderController.selected.orderHeadercol}" title="#{bundle.ViewOrderHeaderTitle_orderHeadercol}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{orderHeaderController.destroyAndView}" value="#{bundle.ViewOrderHeaderDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOrderHeaderEditLink}"/>
+                <br />
+                <h:commandLink action="#{orderHeaderController.prepareCreate}" value="#{bundle.ViewOrderHeaderCreateLink}" />
+                <br />
+                <h:commandLink action="#{orderHeaderController.prepareList}" value="#{bundle.ViewOrderHeaderShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOrderHeaderIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
